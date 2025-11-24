@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Justin Yum Portfolio v3
 
-## Getting Started
+A personal portfolio website showcasing my frontend development skills and passion for modern web technologies. This project demonstrates proficiency with cutting-edge tools and frameworks while serving as a platform to highlight my work and experience.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Core Framework & Runtime
+- **[Next.js 16](https://nextjs.org)** - React framework with App Router for server-side rendering, static site generation, and optimized routing
+- **[React 19](https://react.dev)** - Latest version of React with the React Compiler enabled for automatic optimization and improved performance
+- **[TypeScript 5](https://www.typescriptlang.org)** - Type-safe development with full static type checking across the codebase
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Styling
+- **[Tailwind CSS v4](https://tailwindcss.com)** - Utility-first CSS framework using the new CSS-first configuration approach with custom theming
+- **[Geist Font](https://vercel.com/font)** - Vercel's optimized font family loaded via `next/font` for improved performance
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Testing
+- **[Vitest](https://vitest.dev)** - Fast unit testing framework with React Testing Library for component testing
+- **[React Testing Library](https://testing-library.com/react)** - User-centric testing utilities focusing on behavior over implementation
+- **[Storybook](https://storybook.js.org)** - Component development and testing in isolation with visual documentation
+- **[Playwright](https://playwright.dev)** - End-to-end testing for critical user flows and interactions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Development Tools
+- **[ESLint](https://eslint.org)** - Code linting with Next.js recommended configurations for code quality
+- **[Husky](https://typicode.github.io/husky/)** - Git hooks for automated linting, testing, and commit message validation
+- **[Docker](https://www.docker.com)** - Containerization for consistent development environments across all stages
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### CI/CD & Deployment
+- **[GitHub Actions](https://github.com/features/actions)** - Automated testing and deployment pipelines
+- **[Vercel](https://vercel.com)** - Deployment platform optimized for Next.js applications
