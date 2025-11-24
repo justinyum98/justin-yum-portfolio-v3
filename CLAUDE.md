@@ -38,8 +38,16 @@ src/
   app/                  # App Router pages and layouts
     layout.tsx          # Root layout with Geist fonts
     page.tsx            # Home page
+    page.test.tsx       # Co-located test file (example)
     globals.css         # Global styles with Tailwind v4 theme configuration
+  test/                 # Global test setup and utilities only
+    setup.ts            # Vitest/testing-library configuration
 ```
+
+**Test File Organization:**
+- **Co-located tests**: Place test files next to the components they test (e.g., `Button.tsx` → `Button.test.tsx`)
+- **Global test utilities**: Only use `src/test/` for shared test setup, utilities, and helpers
+- This approach improves maintainability and discoverability
 
 ### Styling System
 
