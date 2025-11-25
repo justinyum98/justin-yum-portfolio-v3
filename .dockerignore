@@ -1,0 +1,37 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Next.js
+.next
+out
+build
+
+# Testing
+coverage
+.vitest
+playwright-report
+test-results
+
+# Misc
+.git
+.gitignore
+README.md
+.env*.local
+.DS_Store
+
+# Docker
+Dockerfile
+Dockerfile.dev
+docker-compose.yml
+.dockerignore
+
+# IDE
+.vscode
+.idea
+
+# Husky
+.husky
+
+# Storybook
+storybook-static

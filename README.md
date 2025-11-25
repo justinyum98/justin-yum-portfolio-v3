@@ -27,3 +27,78 @@ A personal portfolio website showcasing my frontend development skills and passi
 ### CI/CD & Deployment
 - **[GitHub Actions](https://github.com/features/actions)** - Automated testing and deployment pipelines
 - **[Vercel](https://vercel.com)** - Deployment platform optimized for Next.js applications
+
+## Getting Started
+
+### Prerequisites
+- Node.js 20 or higher
+- npm or yarn
+- Docker and Docker Compose (for containerized development)
+
+### Local Development
+
+#### Without Docker
+
+```bash
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+
+# Run tests
+npm test
+
+# Run Storybook
+npm run storybook
+
+# Run E2E tests
+npx playwright test
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+#### With Docker
+
+**Development mode with hot-reload:**
+```bash
+# Start the development container
+docker-compose up dev
+
+# Stop the container
+docker-compose down
+```
+
+**Production mode:**
+```bash
+# Build and start the production container
+docker-compose up app
+
+# Or build separately
+docker-compose build app
+docker-compose up app
+```
+
+The application will be available at [http://localhost:3000](http://localhost:3000).
+
+## Available Scripts
+
+- `npm run dev` - Start Next.js development server
+- `npm run build` - Build the application for production
+- `npm start` - Start the production server
+- `npm run lint` - Run ESLint
+- `npm test` - Run Vitest tests
+- `npm run test:ui` - Run Vitest with UI
+- `npm run test:coverage` - Run tests with coverage report
+- `npm run storybook` - Start Storybook on port 6006
+- `npm run build-storybook` - Build Storybook for deployment
+
+## Docker Architecture
+
+This project includes multi-stage Docker builds optimized for Next.js:
+
+- **Dockerfile** - Production-optimized build with standalone output
+- **Dockerfile.dev** - Development build with hot-reload support
+- **docker-compose.yml** - Orchestrates both development and production containers
+
+The production build uses Next.js's `output: 'standalone'` mode to create minimal, self-contained images.
