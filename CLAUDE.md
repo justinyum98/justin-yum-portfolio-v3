@@ -207,29 +207,32 @@ The project uses Next.js's recommended ESLint configurations:
 - **Feature branch naming**: Use `feature/` prefix (e.g., `feature/user-authentication`)
 - **Pull requests**: Create PRs for merging feature branches into `main`
 - All changes must go through PR review process before merging
+- **Before merging a feature PR**: Run `npm run changeset` to create a changeset describing the changes (see Version Management section below)
 
 ### Version Management
 The project uses **Changesets** for semantic versioning and changelog generation.
 
 **Workflow:**
-1. **During development**: When making changes, create a changeset:
+1. **Before merging a feature PR**: Create a changeset to document user-facing changes:
    ```bash
    npm run changeset
    ```
    - Select the type of change: `patch` (bug fixes), `minor` (new features), or `major` (breaking changes)
    - Write a summary of the changes (will appear in CHANGELOG.md)
    - Commit the generated changeset file (`.changeset/*.md`)
+   - **IMPORTANT**: This should be done before merging the PR, not after
+   - The changeset file will be reviewed as part of the PR
 
-2. **When ready to release**: Update versions and generate changelog:
+2. **When ready to release** (typically after merging multiple PRs): Update versions and generate changelog:
    ```bash
    npm run version
    ```
    - This updates `package.json` version
    - Updates or creates `CHANGELOG.md`
    - Removes consumed changeset files
-   - Commit these changes
+   - Commit these changes to a new PR or directly to main
 
-3. **Publish/Deploy**: After version bump, merge to main to trigger deployment
+3. **Publish/Deploy**: After version bump is merged to main, deployment is triggered automatically
 
 **Best Practices:**
 - Create changesets for user-facing changes only
