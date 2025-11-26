@@ -92,6 +92,8 @@ The application will be available at [http://localhost:3000](http://localhost:30
 - `npm run test:coverage` - Run tests with coverage report
 - `npm run storybook` - Start Storybook on port 6006
 - `npm run build-storybook` - Build Storybook for deployment
+- `npm run changeset` - Create a new changeset for version management
+- `npm run version` - Update versions based on changesets
 
 ## Docker Architecture
 
@@ -131,3 +133,37 @@ All jobs run in parallel for fast feedback.
 - Creates preview deployment for each PR
 - Automatically comments on PR with preview URL
 - Preview environments are deleted when PR is closed
+
+## Version Management
+
+This project uses **[Changesets](https://github.com/changesets/changesets)** for semantic versioning and changelog generation.
+
+### Workflow
+
+1. **Create a changeset** when making user-facing changes:
+   ```bash
+   npm run changeset
+   ```
+   - Select the change type:
+     - `patch` - Bug fixes and minor updates
+     - `minor` - New features (backwards compatible)
+     - `major` - Breaking changes
+   - Write a summary that will appear in the changelog
+   - Commit the generated `.changeset/*.md` file with your PR
+
+2. **Update versions** when ready to release:
+   ```bash
+   npm run version
+   ```
+   - Updates `package.json` version following semver
+   - Generates/updates `CHANGELOG.md` with all changeset summaries
+   - Removes consumed changeset files
+   - Commit and merge these changes to trigger deployment
+
+### Best Practices
+
+- Create changesets for features, bug fixes, and user-visible changes
+- Skip changesets for internal changes (CI config, documentation, refactoring)
+- Write clear, user-focused summaries (they become release notes)
+- One changeset per feature/fix, or combine related changes
+- Review changesets in PRs before merging

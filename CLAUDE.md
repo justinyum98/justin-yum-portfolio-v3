@@ -41,6 +41,10 @@ npx playwright test
 
 # Run Playwright in UI mode
 npx playwright test --ui
+
+# Version management (Changesets)
+npm run changeset        # Create a changeset
+npm run version          # Update versions and changelog
 ```
 
 ## Architecture
@@ -197,12 +201,42 @@ The project uses Next.js's recommended ESLint configurations:
 
 ### Source Control Workflow
 - **Husky 9** for Git hooks automation
-  - Pre-commit hook runs tests automatically
+  - Pre-commit hook runs: lint, tests, and build
   - Ensures code quality before commits
   - Configured in `.husky/` directory
 - **Feature branch naming**: Use `feature/` prefix (e.g., `feature/user-authentication`)
 - **Pull requests**: Create PRs for merging feature branches into `main`
 - All changes must go through PR review process before merging
+
+### Version Management
+The project uses **Changesets** for semantic versioning and changelog generation.
+
+**Workflow:**
+1. **During development**: When making changes, create a changeset:
+   ```bash
+   npm run changeset
+   ```
+   - Select the type of change: `patch` (bug fixes), `minor` (new features), or `major` (breaking changes)
+   - Write a summary of the changes (will appear in CHANGELOG.md)
+   - Commit the generated changeset file (`.changeset/*.md`)
+
+2. **When ready to release**: Update versions and generate changelog:
+   ```bash
+   npm run version
+   ```
+   - This updates `package.json` version
+   - Updates or creates `CHANGELOG.md`
+   - Removes consumed changeset files
+   - Commit these changes
+
+3. **Publish/Deploy**: After version bump, merge to main to trigger deployment
+
+**Best Practices:**
+- Create changesets for user-facing changes only
+- Infrastructure changes (CI, tooling) don't need changesets
+- One changeset per feature/fix or combine related changes
+- Write clear, user-focused changeset summaries
+- Changesets are committed and reviewed with PRs
 
 ## Containerization
 
