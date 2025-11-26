@@ -207,32 +207,32 @@ The project uses Next.js's recommended ESLint configurations:
 - **Feature branch naming**: Use `feature/` prefix (e.g., `feature/user-authentication`)
 - **Pull requests**: Create PRs for merging feature branches into `main`
 - All changes must go through PR review process before merging
-- **Before merging a feature PR**: Run `npm run changeset` to create a changeset describing the changes (see Version Management section below)
+- **Before merging a feature PR**: Run `npm run changeset` then `npm run version` to create a changeset and bump the version (see Version Management section below)
 
 ### Version Management
 The project uses **Changesets** for semantic versioning and changelog generation.
 
 **Workflow:**
-1. **Before merging a feature PR**: Create a changeset to document user-facing changes:
+1. **Before merging a feature PR**: Create a changeset and bump version in the same PR:
    ```bash
+   # Step 1: Create a changeset to document changes
    npm run changeset
    ```
    - Select the type of change: `patch` (bug fixes), `minor` (new features), or `major` (breaking changes)
    - Write a summary of the changes (will appear in CHANGELOG.md)
    - Commit the generated changeset file (`.changeset/*.md`)
-   - **IMPORTANT**: This should be done before merging the PR, not after
-   - The changeset file will be reviewed as part of the PR
 
-2. **When ready to release** (typically after merging multiple PRs): Update versions and generate changelog:
    ```bash
+   # Step 2: Update version and generate changelog
    npm run version
    ```
    - This updates `package.json` version
    - Updates or creates `CHANGELOG.md`
    - Removes consumed changeset files
-   - Commit these changes to a new PR or directly to main
+   - Commit these changes to the same PR
+   - **IMPORTANT**: Both the changeset creation and version bump should be in the PR before merging
 
-3. **Publish/Deploy**: After version bump is merged to main, deployment is triggered automatically
+2. **Publish/Deploy**: After the PR with version bump is merged to main, deployment is triggered automatically
 
 **Best Practices:**
 - Create changesets for user-facing changes only

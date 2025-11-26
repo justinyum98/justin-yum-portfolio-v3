@@ -140,7 +140,9 @@ This project uses **[Changesets](https://github.com/changesets/changesets)** for
 
 ### Workflow
 
-1. **Create a changeset** when making user-facing changes:
+**Before merging a feature PR**, create a changeset and bump the version:
+
+1. **Create a changeset** to document your changes:
    ```bash
    npm run changeset
    ```
@@ -149,16 +151,18 @@ This project uses **[Changesets](https://github.com/changesets/changesets)** for
      - `minor` - New features (backwards compatible)
      - `major` - Breaking changes
    - Write a summary that will appear in the changelog
-   - Commit the generated `.changeset/*.md` file with your PR
+   - Commit the generated `.changeset/*.md` file
 
-2. **Update versions** when ready to release:
+2. **Update version** and generate changelog:
    ```bash
    npm run version
    ```
    - Updates `package.json` version following semver
    - Generates/updates `CHANGELOG.md` with all changeset summaries
    - Removes consumed changeset files
-   - Commit and merge these changes to trigger deployment
+   - Commit these changes to the same PR
+
+3. **Merge the PR** - Once merged to main, deployment is triggered automatically
 
 ### Best Practices
 
