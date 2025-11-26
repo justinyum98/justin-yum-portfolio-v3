@@ -167,10 +167,33 @@ The project uses Next.js's recommended ESLint configurations:
 - Meaningful abstractions that reflect the problem domain
 
 ### CI/CD Pipeline
-- **Feature branches** for all development work
-- **GitHub Actions** for automated testing and deployment
-- **Vercel** as the deployment target
-- Automated checks before merging to main branch
+
+#### GitHub Actions Workflows
+**CI Workflow** (`.github/workflows/ci.yml`)
+- Runs on: Pull requests and pushes to `main`
+- **4 parallel jobs:**
+  1. **Lint**: ESLint code quality checks
+  2. **Test**: Vitest unit/integration tests with coverage reporting
+  3. **E2E**: Playwright tests across Chromium, Firefox, and WebKit
+  4. **Build**: Next.js production build verification
+- Uploads test coverage and Playwright reports as artifacts
+
+**Production Deployment** (`.github/workflows/deploy.yml`)
+- Runs on: Push to `main` branch
+- Uses Vercel CLI for deployment control
+- Deploys to production environment
+- Creates deployment summary in GitHub Actions
+
+**Preview Deployment** (`.github/workflows/preview.yml`)
+- Runs on: Pull requests to `main`
+- Deploys preview environment via Vercel CLI
+- Automatically comments on PR with preview URL
+- Preview deleted when PR is closed
+
+**Required GitHub Secrets:**
+- `VERCEL_TOKEN` - Vercel authentication token
+- `VERCEL_ORG_ID` - Vercel organization/team ID
+- `VERCEL_PROJECT_ID` - Vercel project ID
 
 ### Source Control Workflow
 - **Husky 9** for Git hooks automation

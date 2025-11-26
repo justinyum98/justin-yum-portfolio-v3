@@ -102,3 +102,32 @@ This project includes multi-stage Docker builds optimized for Next.js:
 - **docker-compose.yml** - Orchestrates both development and production containers
 
 The production build uses Next.js's `output: 'standalone'` mode to create minimal, self-contained images.
+
+## CI/CD & Deployment
+
+### GitHub Actions Workflows
+
+This project uses GitHub Actions for automated testing and deployment:
+
+#### CI Pipeline (`.github/workflows/ci.yml`)
+Runs on every pull request and push to `main`:
+
+- **Lint**: ESLint code quality checks
+- **Test**: Vitest unit and integration tests with coverage
+- **E2E**: Playwright end-to-end tests across multiple browsers
+- **Build**: Next.js production build verification
+
+All jobs run in parallel for fast feedback.
+
+#### Deployment Workflows
+
+**Production** (`.github/workflows/deploy.yml`)
+- Triggers on push to `main` branch
+- Deploys to Vercel production environment using Vercel CLI
+- Full control over deployment process
+
+**Preview** (`.github/workflows/preview.yml`)
+- Triggers on pull requests
+- Creates preview deployment for each PR
+- Automatically comments on PR with preview URL
+- Preview environments are deleted when PR is closed
