@@ -27,3 +27,147 @@ A personal portfolio website showcasing my frontend development skills and passi
 ### CI/CD & Deployment
 - **[GitHub Actions](https://github.com/features/actions)** - Automated testing and deployment pipelines
 - **[Vercel](https://vercel.com)** - Deployment platform optimized for Next.js applications
+
+## Getting Started
+
+### Prerequisites
+- Node.js 20 or higher
+- npm or yarn
+- Docker and Docker Compose (for containerized development)
+
+### Local Development
+
+#### Without Docker
+
+```bash
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+
+# Run tests
+npm test
+
+# Run Storybook
+npm run storybook
+
+# Run E2E tests
+npx playwright test
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+#### With Docker
+
+**Development mode with hot-reload:**
+```bash
+# Start the development container
+docker-compose up dev
+
+# Stop the container
+docker-compose down
+```
+
+**Production mode:**
+```bash
+# Build and start the production container
+docker-compose up app
+
+# Or build separately
+docker-compose build app
+docker-compose up app
+```
+
+The application will be available at [http://localhost:3000](http://localhost:3000).
+
+## Available Scripts
+
+- `npm run dev` - Start Next.js development server
+- `npm run build` - Build the application for production
+- `npm start` - Start the production server
+- `npm run lint` - Run ESLint
+- `npm test` - Run Vitest tests
+- `npm run test:ui` - Run Vitest with UI
+- `npm run test:coverage` - Run tests with coverage report
+- `npm run storybook` - Start Storybook on port 6006
+- `npm run build-storybook` - Build Storybook for deployment
+- `npm run changeset` - Create a new changeset for version management
+- `npm run version` - Update versions based on changesets
+
+## Docker Architecture
+
+This project includes multi-stage Docker builds optimized for Next.js:
+
+- **Dockerfile** - Production-optimized build with standalone output
+- **Dockerfile.dev** - Development build with hot-reload support
+- **docker-compose.yml** - Orchestrates both development and production containers
+
+The production build uses Next.js's `output: 'standalone'` mode to create minimal, self-contained images.
+
+## CI/CD & Deployment
+
+### GitHub Actions Workflows
+
+This project uses GitHub Actions for automated testing and deployment:
+
+#### CI Pipeline (`.github/workflows/ci.yml`)
+Runs on every pull request and push to `main`:
+
+- **Lint**: ESLint code quality checks
+- **Test**: Vitest unit and integration tests with coverage
+- **E2E**: Playwright end-to-end tests across multiple browsers
+- **Build**: Next.js production build verification
+
+All jobs run in parallel for fast feedback.
+
+#### Deployment Workflows
+
+**Production** (`.github/workflows/deploy.yml`)
+- Triggers on push to `main` branch
+- Deploys to Vercel production environment using Vercel CLI
+- Full control over deployment process
+
+**Preview** (`.github/workflows/preview.yml`)
+- Triggers on pull requests
+- Creates preview deployment for each PR
+- Automatically comments on PR with preview URL
+- Preview environments are deleted when PR is closed
+
+## Version Management
+
+This project uses **[Changesets](https://github.com/changesets/changesets)** for semantic versioning and changelog generation.
+
+### Workflow
+
+**Before merging a feature PR**, create a changeset and bump the version:
+
+1. **Create a changeset** to document your changes:
+   ```bash
+   npm run changeset
+   ```
+   - Select the change type:
+     - `patch` - Bug fixes and minor updates
+     - `minor` - New features (backwards compatible)
+     - `major` - Breaking changes
+   - Write a summary that will appear in the changelog
+   - Commit the generated `.changeset/*.md` file
+
+2. **Update version** and generate changelog:
+   ```bash
+   npm run version
+   ```
+   - Updates `package.json` version following semver
+   - Generates/updates `CHANGELOG.md` with all changeset summaries
+   - Removes consumed changeset files
+   - Commit these changes to the same PR
+
+3. **Merge the PR** - Once merged to main, deployment is triggered automatically
+
+### Best Practices
+
+- Create changesets for features, bug fixes, and user-visible changes
+- Skip changesets for internal changes (CI config, documentation, refactoring)
+- Write clear, user-focused summaries (they become release notes)
+- One changeset per feature/fix, or combine related changes
+- Review changesets in PRs before merging
